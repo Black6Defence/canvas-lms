@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Fix permissions for the Codespaces workspace
+sudo chown -R docker:docker .
+
 # Copy all .yml.example files to .yml if they don't already exist
 for f in config/*.yml.example; do
   dest="${f%.example}"

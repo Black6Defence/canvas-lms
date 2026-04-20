@@ -55,13 +55,18 @@ RUN mkdir -p /etc/apt/keyrings \
        pbzip2 \
        fontforge \
        git \
+       sudo \
        build-essential \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0
 
+RUN echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 RUN gem install bundler --no-document -v 2.5.10 \
   && find $GEM_HOME ! -user docker | xargs chown docker:docker
 RUN npm install -g npm@9.8.1 && npm cache clean --force
+
+RUN chown -R docker:docker $APP_HOME
 
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 RUN corepack enable && corepack prepare yarn@1.19.1 --activate
