@@ -1,6 +1,9 @@
 {
   "name": "canvas-lms",
-  "dockerComposeFile": [],
+  "dockerComposeFile": [
+    "docker-compose.yml",
+    "docker-compose.codespaces.yml"
+  ],
   "service": "web",
   "workspaceFolder": "/usr/src/app",
   "customizations": {
@@ -15,5 +18,6 @@
         "eamodio.gitlens"
       ]
     }
-  }
+  },
+  "postCreateCommand": "bash script/codespaces_setup.sh"
 }
